@@ -26,7 +26,7 @@ You don't have to include this section but interviewers *love* that you can not 
    git clone https://github.com/curtistry/sponge-search
    ```
 
-Alternatively, you can download the repository as a .zip and extract it somewhere
+   Alternatively, you can download the repository as a .zip and extract it somewhere
 
 2. **Navigate to the server and install packages/dependencies.**
 
@@ -43,7 +43,7 @@ Alternatively, you can download the repository as a .zip and extract it somewher
    
 4. **Navigate to the client and install packages/dependencies.**
 
-This should be done in a new terminal.
+   This should be done in a new terminal.
 
    ```bash
    cd client
