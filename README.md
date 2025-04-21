@@ -3,7 +3,7 @@ SpongeSearch is a web app that allows you to search across multiple episode tran
 
 This project was inspired by a Python script/app that was showcased by *SpongeDubs* on one of their YouTube videos.
 
-**Link:** TBA
+**Link:** https://sponge-search.vercel.app/
 
 ## How It's Made:
 
