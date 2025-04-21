@@ -1,6 +1,5 @@
 import { useState, useEffect } from 'react';
 import axios from "axios";
-import dotenv from "dotenv"
 
 import Pane from '../components/Pane'
 import ResultCard from '../components/ResultCard';
@@ -82,7 +81,7 @@ function Search() {
         params.season = season;
       }
 
-      const backendUrl = process.env.BACKEND_URL || "http://localhost:5000";
+      const backendUrl = process.env.REACT_APP_BACKEND_URL || "http://localhost:5000";
 
       const response = await axios.get(`${backendUrl}/dialogue/search`, {
         params: params,
