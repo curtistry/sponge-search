@@ -9,8 +9,6 @@ import spongebob from '../assets/spongebob.png';
 import { Button, Form, Modal } from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
-dotenv.config();
-
 /* UNUSED. For cosmetic purposes */
 // Hints that will be displayed when the image is clicked (replce with actual hints)
 /* const hints = [
