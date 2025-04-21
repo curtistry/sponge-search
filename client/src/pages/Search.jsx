@@ -1,6 +1,5 @@
 import { useState, useEffect } from 'react';
 import axios from "axios";
-
 import Pane from '../components/Pane'
 import ResultCard from '../components/ResultCard';
 
@@ -8,6 +7,7 @@ import spongebob from '../assets/spongebob.png';
 
 import { Button, Form, Modal } from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
+
 
 /* UNUSED. For cosmetic purposes */
 // Hints that will be displayed when the image is clicked (replce with actual hints)
@@ -79,13 +79,13 @@ function Search() {
         params.season = season;
       }
 
-      const backendUrl = process.env.REACT_APP_BACKEND_URL || "http://localhost:5000";
-
+      const backendUrl = process.env.REACT_APP_BACKEND_URL;
       const response = await axios.get(`${backendUrl}/dialogue/search`, {
         params: params,
       });
 
       console.log("# of results:", response.data.length);
+      console.log("results:",response.data);
       setResults(response.data);
       setMatch(keywords);
       setLoad(false);
