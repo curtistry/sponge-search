@@ -20,13 +20,13 @@ Here's where you can go to town on how you actually built this thing. Write as m
 You don't have to include this section but interviewers *love* that you can not only deliver a final product that looks great but also functions efficiently. Did you write something then refactor it later and the result was 5x faster than the original implementation? Did you cache your assets? Things that you write in this section are **GREAT** to bring up in interviews and you can use this section as reference when studying for technical interviews!
 
 # Running Locally
-To run this locally, you may clone the repository or download as a .zip and extract it somewhere.
-
 1. Clone this repository to your local machine.
 
    ```bash
    git clone https://github.com/curtistry/sponge-search
    ```
+
+Alternatively, you can download the repository as a .zip and extract it somewhere
 
 2. Navigate to the server and install packages/dependencies.
 
