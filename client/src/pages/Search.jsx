@@ -79,10 +79,12 @@ function Search() {
         params.season = season;
       }
 
-      const response = await axios.get("http://localhost:5000/dialogue/search", {
-        params: params
-      }
-      );
+      const backendUrl = process.env.BACKEND_URL || "http://localhost:5000";
+
+      const response = await axios.get(`${backendUrl}/dialogue/search`, {
+        params: params,
+      });
+      
       console.log("# of results:", response.data.length);
       setResults(response.data);
       setMatch(keywords);
