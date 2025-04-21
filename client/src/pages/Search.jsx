@@ -85,7 +85,8 @@ function Search() {
       });
 
       console.log("# of results:", response.data.length);
-      console.log("results:",response.data);
+      //console.log("results:",response.data);
+      
       setResults(response.data);
       setMatch(keywords);
       setLoad(false);
