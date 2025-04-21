@@ -1,21 +1,37 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react';
+import axios from "axios";
 
 import Pane from '../components/Pane'
+import ResultCard from '../components/ResultCard';
 
 import spongebob from '../assets/spongebob.png';
 
-
-import { Button, Form } from 'react-bootstrap';
+import { Button, Form, Modal } from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
+/* UNUSED. For cosmetic purposes */
 // Hints that will be displayed when the image is clicked (replce with actual hints)
-const hints = [
+/* const hints = [
   "SpongeBob SquarePants is a popular animated television series created by Stephen Hillenburg.",
   "The show first premiered on May 1, 1999, and has since become a cultural phenomenon.",
   "SpongeBob lives in a pineapple under the sea and works at the Krusty Krab restaurant.",
   "The show features a variety of characters, including SpongeBob's best friend Patrick Star and his boss Mr. Krabs.",
   "SpongeBob is known for his optimistic personality and love for jellyfishing."
-];
+]; */
+
+// Character list
+const characters = [
+  { id: 'spongebob', name: 'Spongebob' },
+  { id:'patrick', name: 'Patrick' },
+  { id: 'squidward', name: 'Squidward' },
+  { id: 'gary', name: 'Gary'},
+  { id: 'sandy', name: 'Sandy'},
+  { id: 'mr. krabs', name: 'Mr. Krabs' },
+  { id: 'plankton', name: 'Plankton'},
+  { id: 'mrs. puff', name: 'Mrs. Puff' },
+  { id: 'larry', name: 'Larry' },
+  { id: 'incidental', name: 'Incidentals' },
+]
 
 // Season list 
 const seasons = [
@@ -25,16 +41,6 @@ const seasons = [
   { id: 3, name: 'Season 3' },
   { id: 4, name: 'Season 4' },
   { id: 5, name: 'Season 5' },
-  { id: 6, name: 'Season 6' },
-  { id: 7, name: 'Season 7' },
-  { id: 8, name: 'Season 8' },
-  { id: 9, name: 'Season 9' },
-  { id: 10, name: 'Season 10' },
-  { id: 11, name: 'Season 11' },
-  { id: 12, name: 'Season 12' },
-  { id: 13, name: 'Season 13' },
-  { id: 14, name: 'Season 14' },
-  { id: 15, name: 'Season 15' },
 ]
 
 
@@ -43,22 +49,72 @@ function Search() {
   const [keywords, setKeywords] = useState('');
   const [character, setCharacter] = useState('');
   const [season, setSeason] = useState('');
+  const [match, setMatch] = useState('');
+  const [results, setResults] = useState([]);
 
+  const [load, setLoad] = useState(false);
+  const [show, setShow] = useState(false);
+  const [modalMsg, setModalMsg] = useState('');
+
+
+  /* UNUSED. For cosmetic purposes */
   /* Display a random hint when the image is clicked */
-  const imageClicked = () => {
+  /*const imageClicked = () => {
     let hint = hints[Math.floor(Math.random() * hints.length)];
     alert(`Spongebob fact: ${hint}\n(design still in progress)`);
-  };
+  };*/
 
+  const getResults = async () => {
+    try {
+      setLoad(true);
+      // Specify search parameters
+      let params = {};
+      if (keywords) {
+        params.keywords = keywords;
+      }
+      if (character) {
+        params.character = character;
+      }
+      if (season) {
+        params.season = season;
+      }
+
+      const response = await axios.get("http://localhost:5000/dialogue/search", {
+        params: params
+      }
+      );
+      console.log("# of results:", response.data.length);
+      setResults(response.data);
+      setMatch(keywords);
+      setLoad(false);
+    } catch (e) {
+      console.error(e);
+      setMatch('');
+      setLoad(false);
+    }
+  }
+
+  // Method to handle search/filter submissions.
   const handleSubmit = () => {
-    if (!keywords && (!character || !season))
-    {
-      console.error("If no keywords are specified, then a character and a season must be specified.");
+
+    // Check if no keywords were specified.
+    if (keywords.length < 2){
+      console.error("The keyword should be at least 2 characters.");
+      setMatch('');
+      setResults([]);
       return;
     }
+    // Send search and filter data to the Backend API. 
+    getResults();
 
-    console.log(`Keywords: ${keywords}\nCharacter: ${character}\nSeason: ${season}`);
   }
+
+  // Method to handle modal closing.
+  const handleClose = () => {
+    setModalMsg("");
+    setShow(false);
+  }
+
   return (
     <div>
       <div className="app">
@@ -77,27 +133,25 @@ function Search() {
                   onChange={(e) => setKeywords(e.target.value.toLowerCase())}
                 />
               </Form.Group>
-              <br/>
               <Form.Group>
                 <Form.Label>Character</Form.Label>
                 <Form.Control
                   as="select"
-                   /*value={title}*/
-                   onChange={(e) => setCharacter(e.target.value)}
+                  /*value={title}*/
+                  onChange={(e) => setCharacter(e.target.value)}
                 >
                   <option value="">All</option>
-                  <option value="spongebob">Spongebob</option>
-                  <option value="patrick">Patrick</option>
-                  <option value="squidward">Squidward</option>
-                  <option value="mr. krabs">Mr. Krabs</option>
+                  {characters.map((char) => (
+                    <option key={char.id} value={char.id}>{char.name}</option>
+                  ))}
                 </Form.Control>
               </Form.Group>
-              <br/>
+              <br />
               <Form.Group>
                 <Form.Label>Season</Form.Label>
                 <Form.Control
                   as="select"
-                   /*value={title}*/
+                  /*value={title}*/
                   onChange={(e) => setSeason(e.target.value)}
                 >
                   <option value="">All</option>
@@ -106,9 +160,9 @@ function Search() {
                   ))}
                 </Form.Control>
               </Form.Group>
-              <br/>
-              <Button variant="primary" type="button" onClick={handleSubmit}> {/* disabled={adding}*/}
-                Search
+              <br />
+              <Button variant="primary" type="button" onClick={handleSubmit} disabled={load}> 
+                {load ? "Loading" : "Search"}
               </Button>
             </Form>
 
@@ -117,11 +171,33 @@ function Search() {
         {/* Results pane */}
         <div className='resultsPane'>
           <Pane>
-            <h3>Results</h3>
-            <p>Should display results in a list form (each row is a card containing: Episode Title - Season # - Character - Occurence - Image that links to the transcript page)</p>
+            <h3>Results <span id="no-custom-font">({results.length})</span></h3>
+            <div className='resultsList'>
+              {results.length > 0 ?
+                results.map((result) => (
+                  <ResultCard result={result} highlight={match} />
+                ))
+                : <p>
+                  <b>No results found.</b>
+                  <br />
+                  Try modifying your keywords, character, or season.
+                </p>}
+            </div>
           </Pane>
         </div>
       </div>
+
+      <Modal show={show} onHide={handleClose}>
+        <Modal.Header closeButton>
+          <Modal.Title>Message</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>{modalMsg}</Modal.Body>
+        <Modal.Footer>
+          <Button variant="secondary" onClick={handleClose}>
+            OK
+          </Button>
+        </Modal.Footer>
+      </Modal>
 
       {/* Unused Spongebob image */}
       {/* <img src={spongebob} alt="SpongeBob" className="spongebobImage" onClick={imageClicked} /> */}
