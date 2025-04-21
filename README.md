@@ -8,7 +8,7 @@ This project was inspired by a Python script/app that was showcased by *SpongeDu
 ## How It's Made:
 
 - **Front-end Tech:** HTML, CSS, JavaScript, React, and Bootstrap.
-- **Back-end Tech:** Express, MongoDB, and Python (to an extent).
+- **Back-end Tech:** JavaScript, Express, MongoDB, and Python (to an extent).
 
 A Python script was used to scrape most dialogue from transcripts on the *Encyclopedia SpongeBobia* wikia site and insert them into a MongoDB database.
 
