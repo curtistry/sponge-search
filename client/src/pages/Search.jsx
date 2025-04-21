@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import axios from "axios";
+import dotenv from "dotenv"
 
 import Pane from '../components/Pane'
 import ResultCard from '../components/ResultCard';
@@ -8,6 +9,8 @@ import spongebob from '../assets/spongebob.png';
 
 import { Button, Form, Modal } from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
+
+dotenv.config();
 
 /* UNUSED. For cosmetic purposes */
 // Hints that will be displayed when the image is clicked (replce with actual hints)
@@ -84,7 +87,7 @@ function Search() {
       const response = await axios.get(`${backendUrl}/dialogue/search`, {
         params: params,
       });
-      
+
       console.log("# of results:", response.data.length);
       setResults(response.data);
       setMatch(keywords);
