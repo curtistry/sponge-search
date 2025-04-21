@@ -139,6 +139,7 @@ footer {
 
 .resultCard {
   display: flex;
+  align-items: stretch;
   overflow: hidden;
   height: 25%;
   margin-top: 6px;
@@ -260,6 +261,6 @@ footer {
     bottom: -25px;
   }
   .resultImage{
-    visibility: collapse;
+    display: none;
   }
 }
