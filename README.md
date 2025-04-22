@@ -1,9 +1,12 @@
 # SpongeSearch
-SpongeSearch is a web app that allows you to search across multiple episode transcripts of *SpongeBob SquarePants* for any specific dialogue (keywords, phrases, etc...).
+
+*April 7, 2025 - Present*
+
+**SpongeSearch** is a web app that allows you to search across multiple episode transcripts of *SpongeBob SquarePants* for any specific dialogue (keywords, phrases, etc...).
 
 This project was inspired by a Python script/app that was showcased by *SpongeDubs* on one of their YouTube videos.
 
-**Link:** https://sponge-search.vercel.app/
+**Demo Link:** https://sponge-search.vercel.app/
 
 ## How It's Made:
 
