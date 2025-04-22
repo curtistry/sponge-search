@@ -14,6 +14,7 @@ This project was inspired by a Python script/app that was showcased by *SpongeDu
 - **Back-end Tech:** JavaScript, Express, MongoDB, and Python (to an extent).
 
 All transcript dialogue is stored in a MongoDB database.
+
 A Python script (requests + BeautifulSoup4) was used to scrape the data from transcripts on the *Encyclopedia SpongeBobia* wikia site and insert them into the database.
 
 ## Optimizations
