@@ -10,7 +10,7 @@ router.get('/', async (req, res) => {
         const db = await connectDB();
         const collection = db.collection("SB_Dialogue");
         const results = await collection.find({})
-            .limit(250) // Limit to 250 results
+            .limit(150) // Limit to 150 results
             .toArray();
         res.status(200).send(results);
     } catch (error) {
@@ -46,7 +46,7 @@ router.get('/search', async (req, res) => {
 
         // Find documents based on search query/filters.
         const results = await collection.find(filter)
-            .limit(250) // Limit to 250 results
+            .limit(150) // Limit to 150 results
             .toArray();
         res.status(200).send(results);
     } catch (error) {
