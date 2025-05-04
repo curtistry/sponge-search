@@ -23,7 +23,9 @@ function About() {
           <p>
             To use this web app, you can simply fill in the search form and it will display all occurrences of the dialogue based on your filters.
             <br/>
-            Due to performance reasons, searches are limited to <b>250 results</b>, and the <b>first 5 seasons</b>. This will be improved once I learn how to optimize searches.
+            Due to performance reasons, searches are limited to <b>150 results</b>. This will be improved once I learn how to optimize searches.
+            <br/>
+            All seasons/epsidoes, excluding movies and specials, have been added as of May 4, 2025.
           </p>
           <p>Each card in the list will display the following: </p>
           <ul>
